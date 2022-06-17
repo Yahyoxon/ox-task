@@ -16,7 +16,6 @@ function App() {
   const routes = [
     { path: "/", element: Home },
     { path: "/filter", element: Filter },
-    { path: "/login", element: Login },
   ];
 
   useEffect(() => {
@@ -31,19 +30,28 @@ function App() {
   }, [user]);
 
   return (
-    <LayoutContainer>
-      <Suspense fallback={"loading ...."}>
+    <Suspense fallback={"loading ...."}>
+      {user ? (
+        <LayoutContainer>
+          <Routes>
+            {routes.map((route, key) => {
+              const RouteComponent = route.element;
+              return (
+                <Route
+                  key={key}
+                  path={route.path}
+                  element={<RouteComponent />}
+                />
+              );
+            })}
+          </Routes>
+        </LayoutContainer>
+      ) : (
         <Routes>
-          {routes.map((route, key) => {
-            const RouteComponent = route.element;
-            return (
-              <Route key={key} path={route.path} element={<RouteComponent />} />
-            );
-          })}
           <Route path="/login" element={<Login />} />
         </Routes>
-      </Suspense>
-    </LayoutContainer>
+      )}
+    </Suspense>
   );
 }
 
