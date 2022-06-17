@@ -117,14 +117,6 @@ const Home = () => {
         newArray = [...newArray, get(data, "data.items")[index]];
       }
     }
-
-    // get(data, "data.items", []).map((item) => {
-    //   if (
-    //     get(item, "name").toLowerCase().includes(value.search.toLowerCase())
-    //   ) {
-    //     newArray = [...newArray, item];
-    //   }
-    // });
     setSearchData(newArray);
   });
 
